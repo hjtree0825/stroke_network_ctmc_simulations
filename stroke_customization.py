@@ -46,8 +46,8 @@ psc3_transfer_rate_ischemic = 0.15
 ############################################################################
 
 # Initialize (no need to change, in general)
-T = 100
-repl_num = 10
+T = 10000
+repl_num = 100
 
 # Run simulations
 queue_customization(
