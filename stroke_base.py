@@ -20,35 +20,62 @@ STD5 = []
 Mean6 = []
 STD6 = []
 
+MeanBed1 = []
+MeanBed2 = []
+MeanBed3 = []
+MeanBed4 = []
+MeanBed5 = []
+MeanBed6 = []
+StdBed1 = []
+StdBed2 = []
+StdBed3 = []
+StdBed4 = []
+StdBed5 = []
+StdBed6 = []
+
 cc0 = 15 # number of CSC beds when transfer rate is 15%
 cc1 = 15 # number of CSC beds when transfer rate is 35%
 cc2 = 15 # number of CSC beds when transfer rate is 55%
 
 for ph in np.arange(0.15, 0.66, 0.2):
     X_outer = []
+    Mean_outer = []
     cc = csc_bed(ph, cc0, cc1, cc2)
     for iteration in np.arange(repl_num):
-        Dist = queue(ph, c1 = cc0, c2 = cc1, c3 = cc2, T = T)
+        Dist, busy_serv = queue_base_only(ph, c1 = cc0, c2 = cc1, c3 = cc2, T = T)
         X_outer.append(Dist/T)
+        Mean_outer.append(busy_serv/T)
     
     if 0.14 <= ph <= 0.16:
         Mean1.append(np.mean(X_outer, axis = 0))
         STD1.append(np.std(X_outer, axis = 0))
+        MeanBed1.append(np.mean(Mean_outer, axis = 0))
+        StdBed1.append(np.std(Mean_outer, axis = 0))
     elif 0.24 <= ph <= 0.26:
         Mean2.append(np.mean(X_outer, axis = 0))
         STD2.append(np.std(X_outer, axis = 0))
+        MeanBed2.append(np.mean(Mean_outer, axis = 0))
+        StdBed2.append(np.std(Mean_outer, axis = 0))
     elif 0.34 <= ph <= 0.36:
         Mean3.append(np.mean(X_outer, axis = 0))
         STD3.append(np.std(X_outer, axis = 0))
+        MeanBed3.append(np.mean(Mean_outer, axis = 0))
+        StdBed3.append(np.std(Mean_outer, axis = 0))
     elif 0.44 <= ph <= 0.46:
         Mean4.append(np.mean(X_outer, axis = 0))
         STD4.append(np.std(X_outer, axis = 0))
+        MeanBed4.append(np.mean(Mean_outer, axis = 0))
+        StdBed4.append(np.std(Mean_outer, axis = 0))
     elif 0.54 <= ph <= 0.56:
         Mean5.append(np.mean(X_outer, axis = 0))
         STD5.append(np.std(X_outer, axis = 0))
+        MeanBed5.append(np.mean(Mean_outer, axis = 0))
+        StdBed5.append(np.std(Mean_outer, axis = 0))
     elif 0.64 <= ph <= 0.66:
         Mean6.append(np.mean(X_outer, axis = 0))
         STD6.append(np.std(X_outer, axis = 0))
+        MeanBed6.append(np.mean(Mean_outer, axis = 0))
+        StdBed6.append(np.std(Mean_outer, axis = 0))
     else:
         print("ERROR")
 
@@ -81,6 +108,25 @@ plt.xlabel("Transfer rates at PSC 1")
 plt.ylabel("Overflow probability")
 plt.savefig("1_overflow_probability_base.pdf")
 plt.savefig("1_overflow_probability_base.jpg")
+
+plt.figure()
+plt.bar(["0.15", "0.35", "0.55"],
+        [
+            MeanBed1[0],
+            MeanBed3[0],
+            MeanBed5[0]
+        ],
+        yerr = [
+            1.96*StdBed1[0]/np.sqrt(repl_num),
+            1.96*StdBed3[0]/np.sqrt(repl_num),
+            1.96*StdBed5[0]/np.sqrt(repl_num)
+            ]
+        )
+plt.xlabel("Transfer rates at PSC 1")
+plt.ylabel("Mean number of beds occupied")
+plt.savefig("1_mean_base.pdf")
+plt.savefig("1_mean_base.jpg")
+
 
 save_list = [Mean1, Mean3, Mean5]
 open_file = open("base_mean.pkl", "wb")

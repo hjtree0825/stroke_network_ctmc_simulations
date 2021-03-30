@@ -84,9 +84,9 @@ x = np.arange(len(labels))  # the label locations
 width = 0.125  # the width of the bars
 fig, ax = plt.subplots(figsize=(12,8), dpi= 100)
 rects1 = ax.bar(x - 4.5*width/3, M1, width, yerr = [1.96*STD1[0][len(STD1[0])-1]/np.sqrt(repl_num), 1.96*STD3[0][len(STD3[0])-1]/np.sqrt(repl_num), 1.96*STD5[0][len(STD5[0])-1]/np.sqrt(repl_num)], label='Base case')
-rects2 = ax.bar(x - 1.5*width/3, M2, width, yerr = [1.96*STD1_psc[0][len(STD1_psc[0])-1]/np.sqrt(repl_num), 1.96*STD3_psc[0][len(STD3_psc[0])-1]/np.sqrt(repl_num), 1.96*STD5_psc[0][len(STD5_psc[0])-1]/np.sqrt(repl_num)], label='Expanded network case')
-rects3 = ax.bar(x + 1.5*width/3, M3, width, yerr = [1.96*STD1_psc_red[0][len(STD1_psc_red[0])-1]/np.sqrt(repl_num), 1.96*STD3_psc_red[0][len(STD3_psc_red[0])-1]/np.sqrt(repl_num), 1.96*STD5_psc_red[0][len(STD5_psc_red[0])-1]/np.sqrt(repl_num)], label='Expanded network case, reduced transfer')
-rects3 = ax.bar(x + 4.5*width/3, M4, width, yerr = [1.96*STD1_psc_cap[0][len(STD1_psc_cap[0])-1]/np.sqrt(repl_num), 1.96*STD3_psc_cap[0][len(STD3_psc_cap[0])-1]/np.sqrt(repl_num), 1.96*STD5_psc_cap[0][len(STD5_psc_cap[0])-1]/np.sqrt(repl_num)], label='Expanded network case, additional Neuro-ICU beds')
+rects2 = ax.bar(x - 1.5*width/3, M2, width, yerr = [1.96*STD1_psc[0][len(STD1_psc[0])-1]/np.sqrt(repl_num), 1.96*STD3_psc[0][len(STD3_psc[0])-1]/np.sqrt(repl_num), 1.96*STD5_psc[0][len(STD5_psc[0])-1]/np.sqrt(repl_num)], label='Expanded case')
+rects3 = ax.bar(x + 1.5*width/3, M3, width, yerr = [1.96*STD1_psc_red[0][len(STD1_psc_red[0])-1]/np.sqrt(repl_num), 1.96*STD3_psc_red[0][len(STD3_psc_red[0])-1]/np.sqrt(repl_num), 1.96*STD5_psc_red[0][len(STD5_psc_red[0])-1]/np.sqrt(repl_num)], label='Expanded case, reduced transfer')
+rects3 = ax.bar(x + 4.5*width/3, M4, width, yerr = [1.96*STD1_psc_cap[0][len(STD1_psc_cap[0])-1]/np.sqrt(repl_num), 1.96*STD3_psc_cap[0][len(STD3_psc_cap[0])-1]/np.sqrt(repl_num), 1.96*STD5_psc_cap[0][len(STD5_psc_cap[0])-1]/np.sqrt(repl_num)], label='Expanded case, additional Neuro-ICU beds')
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('Overflow probability')
