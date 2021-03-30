@@ -28,7 +28,11 @@ for ph in np.arange(0.15, 0.66, 0.2):
     X_outer = []
     cc = csc_bed(ph, cc0, cc1, cc2)
     for iteration in np.arange(repl_num):
-        Dist = queue_ext(ph, c1 = cc0, c2 = cc1, c3 = cc2, psc_tr_i = 0.025, T = T)
+        Dist = queue_ext(ph, c1 = cc0, c2 = cc1, c3 = cc2,
+                         psc2_tr_i = 0.025,
+                         psc3_tr_i = 0.025,
+                         psc4_tr_i = 0.025,
+                         T = T)
         X_outer.append(Dist/T)
     
     if 0.14 <= ph <= 0.16:
